@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findByRoleAndBloodtype(String donor, String bloodtype);
 
     List<User> findByRole(String donor);
+
+    List<User> countByRole(String donor);
 }
