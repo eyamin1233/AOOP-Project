@@ -27,7 +27,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String adminDashboard(Model model) {
 
-        model.addAttribute("donorCount", userRepository.count());
+        model.addAttribute("userCount", userRepository.countByRole("DONOR"));
 
         model.addAttribute("bloodBankCount",
                 bloodBankRepository.count());
