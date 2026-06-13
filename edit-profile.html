@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container mt-4">
+    <h3 class=" text-danger">Edit Profile</h3>
+
+    <form th:action="@{/profile/edit}"
+          th:object="${user}"
+          method="post"
+          enctype="multipart/form-data">
+
+        <!-- PROFILE PICTURE UPLOAD -->
+        <div class="form-group text-center">
+
+            <label>Profile Picture</label><br>
+
+            <img th:src="${user.profilePicture != null ? '/uploads/' + user.profilePicture : '/images/default-user.png'}"
+                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #dc3545;"
+                 class="mb-2">
+
+            <input type="file"
+                   name="profileImage"
+                   accept="image/*"
+                   class="form-control">
+        </div>
+
+        <!-- NAME -->
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" th:field="*{name}" class="form-control">
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" th:field="*{email}" class="form-control">
+        </div>
+
+        <!-- CONTACT -->
+        <div class="form-group">
+            <label>Contact</label>
+            <input type="text" th:field="*{contact}" class="form-control">
+        </div>
+
+        <!-- LOCATION -->
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" th:field="*{location}" class="form-control">
+        </div>
+
+        <!-- BLOOD TYPE -->
+        <div class="form-group">
+            <label>Blood Type</label>
+            <select th:field="*{bloodtype}" class="form-control">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+        </div>
+
+        <!-- LAST DONATION -->
+        <div class="form-group">
+            <label>Last Donation Date</label>
+            <input type="date" th:field="*{lastdonationdate}" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-danger">Update Profile</button>
+        <a href="/profile" class="btn btn-secondary">Cancel</a>
+
+    </form>
+</div>
+
+</body>
+</html>

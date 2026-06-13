@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head>
+    <title>Blood Bank Dashboard</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="fragments/bloodbank-navbar :: bloodbank-navbar"></div>
+
+<div class="container mt-4">
+
+    <h2 class="text-danger">Blood Bank Dashboard</h2>
+
+    <!-- PROFILE CARD -->
+    <div class="card p-3 mb-3">
+
+        <h4 th:text="${user.name}"></h4>
+
+        <p><b>Location:</b> <span th:text="${user.location}"></span></p>
+
+        <p><b>Contact:</b> <span th:text="${user.contact}"></span></p>
+
+        <p><b>Email:</b> <span th:text="${user.email}"></span></p>
+
+    </div>
+
+    <!-- BLOOD STOCK -->
+    <div class="card p-3">
+
+        <h5>Blood Stock</h5>
+
+        <table class="table table-bordered">
+
+            <tr><th>A+</th><td th:text="${bank != null ? bank.aPositive : 0}"></td></tr>
+            <tr><th>A-</th><td th:text="${bank != null ? bank.aNegative : 0}"></td></tr>
+            <tr><th>B+</th><td th:text="${bank != null ? bank.bPositive : 0}"></td></tr>
+            <tr><th>B-</th><td th:text="${bank != null ? bank.bNegative : 0}"></td></tr>
+            <tr><th>AB+</th><td th:text="${bank != null ? bank.abPositive : 0}"></td></tr>
+            <tr><th>AB-</th><td th:text="${bank != null ? bank.abNegative : 0}"></td></tr>
+            <tr><th>O+</th><td th:text="${bank != null ? bank.oPositive : 0}"></td></tr>
+            <tr><th>O-</th><td th:text="${bank != null ? bank.oNegative : 0}"></td></tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

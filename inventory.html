@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head>
+    <title>Blood Inventory</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div th:replace="fragments/bloodbank-navbar :: bloodbank-navbar"></div>
+
+<div class="container mt-4">
+
+    <h2 class="text-danger">Update Blood Inventory</h2>
+
+    <form action="/inventory/update" method="post">
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th>A+</th>
+                <td><input type="number" class="form-control"
+                           name="aPositive"
+                           th:value="${bank.aPositive}"></td>
+            </tr>
+
+            <tr>
+                <th>A-</th>
+                <td><input type="number" class="form-control"
+                           name="aNegative"
+                           th:value="${bank.aNegative}"></td>
+            </tr>
+
+            <tr>
+                <th>B+</th>
+                <td><input type="number" class="form-control"
+                           name="bPositive"
+                           th:value="${bank.bPositive}"></td>
+            </tr>
+
+            <tr>
+                <th>B-</th>
+                <td><input type="number" class="form-control"
+                           name="bNegative"
+                           th:value="${bank.bNegative}"></td>
+            </tr>
+
+            <tr>
+                <th>AB+</th>
+                <td><input type="number" class="form-control"
+                           name="abPositive"
+                           th:value="${bank.abPositive}"></td>
+            </tr>
+
+            <tr>
+                <th>AB-</th>
+                <td><input type="number" class="form-control"
+                           name="abNegative"
+                           th:value="${bank.abNegative}"></td>
+            </tr>
+
+            <tr>
+                <th>O+</th>
+                <td><input type="number" class="form-control"
+                           name="oPositive"
+                           th:value="${bank.oPositive}"></td>
+            </tr>
+
+            <tr>
+                <th>O-</th>
+                <td><input type="number" class="form-control"
+                           name="oNegative"
+                           th:value="${bank.oNegative}"></td>
+            </tr>
+
+        </table>
+
+        <button type="submit" class="btn btn-success">
+            Update Inventory
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

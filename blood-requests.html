@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Blood Requests</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/chat.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div id="chatBubble" onclick="toggleChat()">💬</div>
+
+<div id="chatWidget">
+    <div class="chat-header">
+        RedPulse AI Chatbot
+        <span onclick="toggleChat()" style="float:right;cursor:pointer;">✖</span>
+    </div>
+
+    <div id="chatBox"></div>
+
+    <div class="chat-input">
+        <input type="text" id="msg" placeholder="Ask something...">
+        <button onclick="send()">Send</button>
+    </div>
+</div>
+
+<div class="container mt-4">
+
+    <h2 class=" text-danger">Blood Request Board</h2>
+
+    <!-- SEARCH -->
+    <form class="form-inline my-3" method="get" th:action="@{/blood-requests/search}">
+        <label>
+            <select name="bloodType" class="form-control mr-2">
+                <option value="">-- Select Blood Type --</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+        </label>
+
+        <button class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- POST FORM -->
+    <div class="card p-3 mb-4">
+        <form method="post"
+              th:action="@{/blood-requests}"
+              th:object="${newRequest}">
+
+            <select class="form-control mb-2"
+                    th:field="*{bloodType}"
+                    required>
+
+                <option value="">-- Select Blood Type --</option>
+
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+
+            </select>
+
+            <input class="form-control mb-2"
+                   type="number"
+                   placeholder="Number of Bags"
+                   th:field="*{bags}">
+
+            <input class="form-control mb-2"
+                   placeholder="Location"
+                   th:field="*{location}">
+
+            <input class="form-control mb-2"
+                   type="time"
+                   th:field="*{requestTime}">
+
+            <input class="form-control mb-2"
+                   type="date"
+                   th:field="*{requestDate}">
+
+            <button class="btn btn-danger">
+                Post Request
+            </button>
+
+        </form>
+    </div>
+
+    <!-- DISPLAY POSTS -->
+    <div th:each="r : ${requests}"
+         class="card mb-2 p-3">
+
+        <h5 class="text-danger"
+            th:text="${r.bloodType}">
+        </h5>
+
+        <p>
+            Bags:
+            <span th:text="${r.bags}"></span>
+        </p>
+
+        <p>
+            Location:
+            <span th:text="${r.location}"></span>
+        </p>
+
+        <p>
+            Date:
+            <span th:text="${r.requestDate}"></span>
+        </p>
+
+        <p>
+            Time:
+            <span th:text="${r.requestTime}"></span>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
